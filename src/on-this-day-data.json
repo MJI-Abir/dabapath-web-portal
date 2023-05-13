@@ -1,0 +1,16 @@
+[
+    {
+        "event_id" : 401,
+        "event_title" : "Noteworthy technology acquisitions 2021",
+        "event_date" : "17-03-2008",
+        "event_photo" : "src/assets/chess1.jpeg",
+        "event_description" : "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order."
+    },
+    {
+      "event_id": 402,
+      "event_title": "Noteworthy technology acquisitions 2021",
+      "event_date": "14-05-2008",
+      "event_photo": "src/assets/chess1.jpeg",
+      "event_description": "eta ajke ghotechilo bondhu."
+    }
+]

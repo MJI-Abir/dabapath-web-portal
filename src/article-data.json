@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "articleImage" : "src/assets/chess1.jpeg",
+    "title": "chess nigga died after getting backranked",
+    "date_published" : "15-07-2022"
+  },
+
+  {
+    "id": 2,
+    "articleImage" : "src/assets/chess1.jpeg",
+    "title": "magnus carlsen says hello madarchod",
+    "date_published": "15-07-2022"
+  }
+]

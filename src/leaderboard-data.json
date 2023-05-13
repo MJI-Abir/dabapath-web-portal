@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "Magnus Carlsen",
+    "nationality": "Norway",
+    "rating": 2847,
+    "birthYear": 1990
+  },
+  {
+    "id": 2,
+    "name": "Ian Nepomniachtchi",
+    "nationality": "Russia",
+    "rating": 2794,
+    "birthYear": 1990
+  },
+  {
+    "id": 3,
+    "name": "Ding Liren",
+    "nationality": "China",
+    "rating": 2799,
+    "birthYear": 1992
+  },
+  {
+    "id": 4,
+    "name": "Alireza Firouzja",
+    "nationality": "France",
+    "rating": 2785,
+    "birthYear": 2003
+  },
+  {
+    "id": 5,
+    "name": "Hikaru Nakamura",
+    "nationality": "United States",
+    "rating": 2775,
+    "birthYear": 1987
+  },
+  {
+    "id": 6,
+    "name": "Anish Giri",
+    "nationality": "Netherlands",
+    "rating": 2768,
+    "birthYear": 1994
+  },
+  {
+    "id": 7,
+    "name": "Fabiano Caruana",
+    "nationality": "United States",
+    "rating": 2764,
+    "birthYear": 1992
+  },
+  {
+    "id": 8,
+    "name": "Wesley So",
+    "nationality": "United States",
+    "rating": 2760,
+    "birthYear": 1993
+  },
+  {
+    "id": 9,
+    "name": "Viswanathan Anand",
+    "nationality": "India",
+    "rating": 2754,
+    "birthYear": 1969
+  },
+  {
+    "id": 10,
+    "name": "Teimour Radjabov",
+    "nationality": "Azerbaijan",
+    "rating": 2747,
+    "birthYear": 1987
+  }
+]
