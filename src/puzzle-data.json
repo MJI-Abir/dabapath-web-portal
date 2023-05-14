@@ -1,0 +1,71 @@
+[
+  {
+    "id": 1,
+    "image": "src/assets/1.jpg",
+    "difficulty": "easy",
+    "solution": "Qxd6+, Kxd6, exf7+"
+  },
+  {
+    "id": 2,
+    "image": "src/assets/2.jpg",
+    "difficulty": "easy",
+    "pgn": "asdf",
+    "solution": "sdf"
+  },
+  {
+    "id": 3,
+    "image": "src/assets/3.jpg",
+    "difficulty": "easy",
+    "pgn": "sdf",
+    "solution": "asdf"
+  },
+  {
+    "id": 4,
+    "image": "src/assets/4.jpg",
+    "difficulty": "medium",
+    "pgn": "asdf",
+    "solution": "sdf"
+  },
+  {
+    "id": 5,
+    "image": "src/assets/5.jpg",
+    "difficulty": "medium",
+    "pgn": "sdf",
+    "solution": "asdf"
+  },
+  {
+    "id": 6,
+    "image": "src/assets/6.jpg",
+    "difficulty": "medium",
+    "pgn": "asdf",
+    "solution": "sdf"
+  },
+  {
+    "id": 7,
+    "image": "src/assets/7.jpg",
+    "difficulty": "hard",
+    "pgn": "sdf",
+    "solution": "asdf"
+  },
+  {
+    "id": 8,
+    "image": "src/assets/8.jpg",
+    "difficulty": "hard",
+    "pgn": "asdf",
+    "solution": "sdf"
+  },
+  {
+    "id": 9,
+    "image": "src/assets/9.jpg",
+    "difficulty": "hard",
+    "pgn": "sdf",
+    "solution": "asdf"
+  },
+  {
+    "id": 10,
+    "image": "src/assets/chess1.jpg",
+    "difficulty": "medium",
+    "pgn": "asdf",
+    "solution": "sdf"
+  }
+]

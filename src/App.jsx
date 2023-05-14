@@ -7,7 +7,7 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Article from "./pages/article";
 import Leaderboard from "./pages/Leaderboard";
-import LeaderboardRecords from "./leaderboard-data.json";
+import Puzzle from "./pages/Puzzle"
 import OnThisDay from "./pages/OnThisDay";
 import Sidebar from "./components/sidebar/Sidebar";
 
@@ -26,6 +26,7 @@ function App() {
               <Route path="article" element={<Article />}></Route>
               <Route path="leaderboard" element={<Leaderboard />}></Route>
               <Route path="onThisDay" element={<OnThisDay />}></Route>
+              <Route path="puzzle" element={<Puzzle />}></Route>
             </Route>
           </Routes>
         </BrowserRouter>
