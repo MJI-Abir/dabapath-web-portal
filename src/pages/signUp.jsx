@@ -1,47 +1,67 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 import axios from "axios";
+import api from "../api";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  // const [username, setUsername] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const handleSignUp = async (event) => {
-    event.preventDefault();
-    if (password != confirmPassword) {
+  const nav = useNavigate();
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+
+    if (e.target.password.value != e.target.password2.value) {
       setError("Password does not match!");
       return;
     }
-    try {
-      const response = await axios
-        .post("http://localhost:8000/api/signup/", {
-          username,
-          email,
-          password,
-        })
-        .then((response) => {
-          console.log(response);
-          setUsername("");
-          setEmail("");
-          setPassword("");
-          setConfirmPassword("");
-          setSuccess(true);
-        })
-        .catch((error) => {
-          console.log(error);
-          setError("Failed to sign up");
-        });
-      alert(
-        "Verification email has been sent to your email. Please check your inbox."
-      );
-    } catch (error) {
-      console.error(error.response.data);
-      alert(error.response.data.detail);
-    }
+    const dataToPost = new FormData();
+    dataToPost.set("phone", e.target.phone.value);
+    dataToPost.set("password", e.target.password.value);
+
+    api
+      .post("/register/", dataToPost)
+      .then((res) => {
+        setSuccess(true);
+        nav("/login");
+      })
+      .catch((err) => {
+        console.log(err);
+        setError("Failed to sign up");
+      });
+
+    // try {
+    //   const response = await axios
+    //     .post("http://localhost:8000/api/signup/", {
+    //       username,
+    //       email,
+    //       password,
+    //     })
+    //     .then((response) => {
+    //       console.log(response);
+    //       setUsername("");
+    //       setEmail("");
+    //       setPassword("");
+    //       setConfirmPassword("");
+    //       setSuccess(true);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //       setError("Failed to sign up");
+    //     });
+    //   alert(
+    //     "Verification email has been sent to your email. Please check your inbox."
+    //   );
+    // } catch (error) {
+    //   console.error(error.response.data);
+    //   alert(error.response.data.detail);
+    // }
   };
 
   return (
@@ -63,8 +83,8 @@ function SignUp() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Create an account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
-              <div>
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSignUp}>
+              {/* <div>
                 <label
                   htmlFor="username"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -79,18 +99,18 @@ function SignUp() {
                   placeholder="abChess69"
                   required=""
                 />
-              </div>
+              </div> */}
               <div>
                 <label
-                  htmlFor="email"
+                  htmlFor="phone"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Your email
+                  Your phone
                 </label>
                 <input
-                  type="email"
-                  name="email"
-                  id="email"
+                  type="text"
+                  name="phone"
+                  id="phone"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
                   required=""
@@ -114,15 +134,15 @@ function SignUp() {
               </div>
               <div>
                 <label
-                  htmlFor="confirm-password"
+                  htmlFor="password2"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Confirm password
                 </label>
                 <input
-                  type="confirm-password"
-                  name="confirm-password"
-                  id="confirm-password"
+                  type="password"
+                  name="password2"
+                  id="password2"
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required=""

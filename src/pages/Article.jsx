@@ -19,8 +19,8 @@ const Article = () => {
   // }, []);
 
   return (
-    <div className="dark:bg-gray-900 py-12">
-      <div className="w-1/3 mx-auto">
+    <div className="dark:bg-gray-900 py-12 min-h-screen">
+      <div className="mx-auto grid grid-cols-3 gap-4 w-4/5">
         {data.map((article) => (
           <ArticleCard className="" key={article.id} article={article} />
         ))}

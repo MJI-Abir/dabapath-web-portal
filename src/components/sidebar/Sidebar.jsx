@@ -7,25 +7,33 @@ import { useState } from "react";
 import { Modal } from "antd";
 import { AiFillHome } from "react-icons/ai";
 import { BsFillPuzzleFill } from "react-icons/bs";
-import {  MdLeaderboard} from "react-icons/md";
+import { MdLeaderboard } from "react-icons/md";
 import { BiNews } from "react-icons/bi";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { BiLogIn } from "react-icons/bi";
+import { BiLogOut } from "react-icons/bi";
+import { useGlobalState } from "../../User";
 
 const Sidebar = () => {
   const nav = useNavigate();
   let location = useLocation();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [modal2Open, setModal2Open] = useState(false);
   const [isOpen, setOpen] = useState(false);
+
+  const [user, setUser] = useGlobalState("user");
+  const [isLoggedIn, setIsLoggedIn] = useGlobalState("isLoggedIn");
 
   const to = (address) => {
     setOpen(false);
     nav(`/${address}`);
   };
 
-  const logout = () => {};
+  const logout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  };
 
   return (
     <div>
@@ -75,8 +83,9 @@ const Sidebar = () => {
                 setModal2Open(true);
                 setOpen(false);
               }}
-              className="menu-item"
+              className="cursor-pointer menu-item"
             >
+              <BiLogOut className="text-xl inline-block mr-8" />
               Logout
             </div>
           </li>

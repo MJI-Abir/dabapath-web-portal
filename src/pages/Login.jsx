@@ -1,49 +1,98 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import api from "../api";
+import { useNavigate } from "react-router-dom";
+import { useGlobalState } from "../User";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await axios.post("/api/login/", {
-        username: username,
-        password: password,
-      });
-      if (response.status === 200) {
-        window.location.href = "/home";
-      }
-    } catch (error) {
-      setError("Invalid username or password");
-    }
+  const [user, setUser] = useGlobalState("user");
+  const [isLoggedIn, setIsLoggedIn] = useGlobalState("isLoggedIn");
+
+  const [isOpen, setOpen] = useState(false);
+
+  const to = (address) => {
+    setOpen(false);
+    nav(`/${address}`);
   };
 
+  const nav = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const dataToPost = new FormData();
+    dataToPost.set("phone", e.target.phone.value);
+    dataToPost.set("password", e.target.password.value);
+
+    api
+      .post("/login/", dataToPost)
+      .then((res) => {
+        // Set token
+        localStorage.setItem("token", res.data["access"]);
+        api
+          .get("/profile", {
+            headers: {
+              Authorization: `Bearer ${res.data["access"]}`,
+            },
+          })
+          .then((profileResponse) => {
+            let toUpdateKeys = [
+              "id",
+              "name",
+              "phone",
+              "email",
+              "verified",
+              "groups",
+            ];
+            let profile = profileResponse.data[0];
+            Object.keys(user).forEach((k) => {
+              if (toUpdateKeys.includes(k)) {
+                user[k] = profile[k];
+              }
+            });
+            setUser(user);
+            setIsLoggedIn(true);
+            nav("/");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        setError("Invalid username or password");
+      });
+  };
+
+  useEffect(() => {
+    if (isLoggedIn) nav("/home");
+  }, []);
+
   return (
-    <div className="bg-gray-50 dark:bg-gray-900">
+    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign in to your account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form className="space-y-4 md:space-y-6" onSubmit={handleLogin}>
               <div>
                 <label
-                  htmlFor="email"
+                  htmlFor="phone"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Your email
+                  Your phone
                 </label>
                 <input
-                  type="email"
-                  name="email"
-                  id="email"
+                  type="phone"
+                  name="phone"
+                  id="phone"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="name@company.com"
                   required=""
                 />
               </div>
@@ -98,12 +147,12 @@ function Login() {
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{" "}
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                <div
+                  onClick={() => to("signUp")}
+                  className="cursor-pointer font-medium text-blue-600 hover:underline dark:text-blue-500"
                 >
                   Sign up
-                </a>
+                </div>
               </p>
             </form>
           </div>
